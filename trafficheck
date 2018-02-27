@@ -1,9 +1,9 @@
 message=Map();
 destination_details= getUrl("https://maps.google.com/maps/api/geocode/json?address=" + arguments+ "&key= AIzaSyAqavwUMbnmB--iKE9i6npsn8vKW9tYmN4");
 
-lat_long= destinationL_details.toMap().get("results").toMap().get("geometry").get("location");
+lat_long= destination_details.toMap().get("results").toMap().get("geometry").get("location");
 lat = lat_long.get("lat");
-long= lat_long.get("lng");
+lang= lat_long.get("lng");
 
 traffic = getUrl("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" +location.get("latitude")+","+location.get("longitude")+"&destinations=" +lat +"," +lang+ "&departure_time=now&key= AIzaSyAqavwUMbnmB--iKE9i6npsn8vKW9tYmN4");
 
