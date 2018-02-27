@@ -1,0 +1,24 @@
+message=Map();
+destination_details= getUrl("https://maps.google.com/maps/api/geocode/json?address=" + arguments+ "&key= AIzaSyAqavwUMbnmB--iKE9i6npsn8vKW9tYmN4");
+
+lat_long= destinationL_details.toMap().get("results").toMap().get("geometry").get("location");
+lat = lat_long.get("lat");
+long= lat_long.get("lng");
+
+traffic = getUrl("https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=" +location.get("latitude")+","+location.get("longitude")+"&destinations=" +lat +"," +lang+ "&departure_time=now&key= AIzaSyAqavwUMbnmB--iKE9i6npsn8vKW9tYmN4");
+
+results = traffic.toMap().get("rows").toMap().get("elements").toMap.get("status");
+
+if(results == "OK")
+{
+time=traffic.toMap().get("rows").toMap().get("elements").toMap().get("duration").get("text");
+time_traffic= traffic.toMap().get("rows").toMap().get("elements").toMap().get("duration_in_traffic").get("text");
+
+message = {"text":"Hi!" +user.get("first_name")+"! Here's the traffic information to *"+arguments+"*\nActual Time:"+time+"\nTime with Traffic:"+time_traffic +"! :smile: ", "card":{"title":"Traffic for You!","icon":"https://screenshots.en.sftcdn.net/en/scrn/97000/97769/google-maps-58-100x100.png","theme":"prompt"}};
+}
+else 
+{
+mapURL ="https://www.google.co.in/maps/";
+message.put("text","Sorry! Can't find the traffic details now. Try[here](" + mapURL +")");
+}
+return message;
