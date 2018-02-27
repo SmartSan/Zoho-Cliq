@@ -1,0 +1,29 @@
+
+message = Map();
+if(selections == null)
+{
+	url = "https://api.giphy.com/v1/gifs/search?q=" + encodeUrl(arguments) + "&api_key=dX6OsCBCtzXnu4b8FLzXXJOpYxqp3W2P";
+	response = getUrl(url);
+	gifs = response.toMap().get("data");
+	if(gifs.size() > 0)
+	{
+		image = gifs.get(0).get("images");
+		img = image.get("fixed_height").get("url");
+		img = "https:" + img.subString(img.indexOf(":") + 1);
+		message.put("message","Giphy for" + arguments);
+	}
+	else
+	{
+		img = "https://i.annihil.us/u/prod/marvel//univers3zx/images/0/02/Image_not_available.gif";
+	}
+}
+else
+{
+	info selections;
+	info selections.get(0);
+	img = selections.get(0).get("imageurl");
+	info img;
+}
+message = Map();
+aa = zoho.chat.postToChat(chat.get("chid"),img);
+return message;
